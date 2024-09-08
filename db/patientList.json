@@ -1,0 +1,40 @@
+{
+  "patientData": [
+    {
+      "id": "1",
+      "name": "John Doe",
+      "age": 45,
+      "gender": "Male",
+      "contact": "123-456-7890",
+      "medicalHistory": "Diabetes, Hypertension",
+      "address": "123 Maple Street, New York, NY"
+    },
+    {
+      "id": "2",
+      "name": "Jane Smith",
+      "age": 32,
+      "gender": "Female",
+      "contact": "234-567-8901",
+      "medicalHistory": "Asthma, Anxiety",
+      "address": "456 Oak Avenue, San Francisco, CA"
+    },
+    {
+      "id": "3",
+      "name": "Michael Johnson",
+      "age": 60,
+      "gender": "Male",
+      "contact": "345-678-9012",
+      "medicalHistory": "Coronary Artery Disease, Stroke",
+      "address": "789 Pine Road, Chicago, IL"
+    },
+    {
+      "id": "4",
+      "name": "Emily Brown",
+      "age": 27,
+      "gender": "Female",
+      "contact": "456-789-0123",
+      "medicalHistory": "Hypothyroidism, Migraines",
+      "address": "Bhilai"
+    }
+  ]
+}
