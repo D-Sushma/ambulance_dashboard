@@ -37,7 +37,7 @@ const openedMixin = (theme) => ({
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.enteringScreen,
   }),
-  overflowX: "hidden",
+  overflowX: "hidden",  
 });
 
 const closedMixin = (theme) => ({
@@ -121,13 +121,13 @@ const sidebarIcons = [
 
 export default function SideNav() {
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(true);
   const [selectedSidebarItem, setSelectedSidebarItem] =
     useState("Patient List");
 
   const handleDrawerOpen = () => {
-    // setOpen(true);
-    setOpen(!open);
+    setOpen(true);
+    // setOpen(!open);
   };
 
   const handleDrawerClose = () => {
@@ -190,7 +190,7 @@ export default function SideNav() {
           </Typography>
         </Toolbar>
       </AppBar>
-      <Drawer variant="permanent" open={open}>
+      <Drawer variant="permanent" open>
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === "rtl" ? (
