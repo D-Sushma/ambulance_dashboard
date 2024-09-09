@@ -1,8 +1,10 @@
 import * as React from "react";
+import axios from "axios";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { Button, Grid, Typography } from "@mui/material";
 import { useState } from "react";
+import ViewPatientDialog from "./ViewPatientDialog";
 
 export default function BasicTextFields() {
   const [patient, setPatient] = useState({
@@ -13,6 +15,12 @@ export default function BasicTextFields() {
     address: "",
     medicalHistory: "",
   });
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isSubmitSuccess, setIsSubmitSuccess] = useState(false);
+ 
+  const toggleModal = (value) => {
+    setIsModalOpen(value)
+  };
 
   const handleChange = (e) => {
     // console.log("handleChange called", e.target.value, e.target.name);
@@ -23,12 +31,19 @@ export default function BasicTextFields() {
       ...prevData,
       [name]: value,
     }));
+
+    setIsSubmitSuccess(false)
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     try {
       // console.log("submit", patient);
-      // const response = axios
+      // const response =  await axios.post('http://localhost:5051/api/regpatient', patient)
+      // if(response?.data?.data){
+        console.log("Submit success fully");
+        setIsSubmitSuccess(true)
+        // console.log("Response", response?.data?.data);
+      // }
     } catch (error) {
       console.log("Error submitting data", error);
     }
@@ -65,7 +80,7 @@ export default function BasicTextFields() {
       </Box>
 
       <Box
-        sx={{ width: "50%", border: "1px solid", p: 2, borderRadius: "10px" }}
+        sx={{ width: "50%", border: "1px solid", p: 2, borderRadius: "10px", mt:2 }}
       >
         <Grid container spacing={2}>
           <Grid item xs={12}>
@@ -139,13 +154,23 @@ export default function BasicTextFields() {
               variant="contained"
               color="primary"
               onClick={handleSubmit}
-              disabled={isSubmitDisabled()}
+              disabled={isSubmitDisabled() || isSubmitSuccess}
             >
               Add Patient
+            </Button>
+            <Button
+              variant="contained"
+              color="primary"
+             sx={{marginLeft: "10px"}}
+              onClick={()=>(toggleModal(true))}
+              disabled={!isSubmitSuccess}
+            >
+              View
             </Button>
           </Grid>
         </Grid>
       </Box>
+      <ViewPatientDialog open={isModalOpen} patient={patient} closeModal={toggleModal}/>
     </Box>
   );
 }

@@ -28,6 +28,8 @@ import CreateIcon from "@mui/icons-material/Create";
 import ViewListIcon from "@mui/icons-material/ViewList";
 import PatientForm from "./patient/PatientForm";
 import PatientList from "./patient/PatientList";
+import PrescriptionForm from "./Prescription/PrescriptionForm";
+import PrescriptionList from "./Prescription/PrescriptionList";
 
 const drawerWidth = 240;
 
@@ -143,24 +145,18 @@ export default function SideNav() {
     switch (selectedSidebarItem) {
       case "Patient List":
         return <PatientList/>;
-        break;
       case "Add Patient":
         // return "Add Patient";
         return <PatientForm />;
-        break;
       case "Create Prescription":
-        return "Create Prescription";
-        break;
+        return <PrescriptionForm/>;
       case "View Prescription":
-        return "View Prescription";
-        break;
+        return <PrescriptionList/>;
       case "Doctor Profile":
         return "Doctor Profile";
-        break;
 
       default:
         return "Patient List";
-        break;
     }
   };
 

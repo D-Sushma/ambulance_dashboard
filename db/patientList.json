@@ -1,40 +1,65 @@
 {
-  "patientData": [
-    {
-      "id": "1",
-      "name": "John Doe",
-      "age": 45,
-      "gender": "Male",
-      "contact": "123-456-7890",
-      "medicalHistory": "Diabetes, Hypertension",
-      "address": "123 Maple Street, New York, NY"
-    },
-    {
-      "id": "2",
-      "name": "Jane Smith",
-      "age": 32,
-      "gender": "Female",
-      "contact": "234-567-8901",
-      "medicalHistory": "Asthma, Anxiety",
-      "address": "456 Oak Avenue, San Francisco, CA"
-    },
-    {
-      "id": "3",
-      "name": "Michael Johnson",
-      "age": 60,
-      "gender": "Male",
-      "contact": "345-678-9012",
-      "medicalHistory": "Coronary Artery Disease, Stroke",
-      "address": "789 Pine Road, Chicago, IL"
-    },
-    {
-      "id": "4",
-      "name": "Emily Brown",
-      "age": 27,
-      "gender": "Female",
-      "contact": "456-789-0123",
-      "medicalHistory": "Hypothyroidism, Migraines",
-      "address": "Bhilai"
-    }
-  ]
+  "data": [
+      {
+          "_id": "66dddea5857a899b0fbe1270",
+          "name": "richa",
+          "age": "27",
+          "gender": "Female",
+          "contact": "8766456788",
+          "address": "bhilai",
+          "medicalHistory": "Asthma",
+          "createdAt": "2024-09-08T17:28:05.883Z",
+          "updatedAt": "2024-09-08T17:28:05.883Z",
+          "__v": 0
+      },
+      {
+          "_id": "66dddede4ef03f3b16abbf52",
+          "name": "richa",
+          "age": "27",
+          "gender": "Female",
+          "contact": "8766456788",
+          "address": "bhilai",
+          "medicalHistory": "Asthma",
+          "createdAt": "2024-09-08T17:29:02.346Z",
+          "updatedAt": "2024-09-08T17:29:02.346Z",
+          "__v": 0
+      },
+      {
+          "_id": "66dde1b9c90b769d76ac2f1d",
+          "name": "richa",
+          "age": "27",
+          "gender": "Female",
+          "contact": "8766456788",
+          "address": "bhilai",
+          "medicalHistory": "Asthma",
+          "createdAt": "2024-09-08T17:41:13.311Z",
+          "updatedAt": "2024-09-08T17:41:13.311Z",
+          "__v": 0
+      },
+      {
+          "_id": "66dde5b831c1457e9cfb10f1",
+          "name": "vijay",
+          "age": "27",
+          "gender": "Female",
+          "contact": "8766456788",
+          "address": "bhilai",
+          "medicalHistory": "Asthma",
+          "createdAt": "2024-09-08T17:58:16.664Z",
+          "updatedAt": "2024-09-08T17:58:16.664Z",
+          "__v": 0
+      },
+      {
+          "_id": "66de0c1cf1d92a0c71549299",
+          "name": "ruchi",
+          "age": "27",
+          "gender": "Female",
+          "contact": "5666778988",
+          "address": "bhilai",
+          "medicalHistory": "Asthama",
+          "createdAt": "2024-09-08T20:42:04.680Z",
+          "updatedAt": "2024-09-08T20:42:04.680Z",
+          "__v": 0
+      }
+  ],
+  "message": "success"
 }

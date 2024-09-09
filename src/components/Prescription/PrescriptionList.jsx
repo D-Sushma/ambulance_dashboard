@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { useState } from "react";
-import axios from "axios";
+import { useState } from 'react';
+import axios from 'axios';
 import Box from '@mui/material/Box';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/DeleteOutlined';
@@ -11,38 +11,48 @@ import {
   DataGrid,
   GridActionsCellItem,
   GridRowEditStopReasons,
-  GridToolbar
+  GridToolbar,
 } from '@mui/x-data-grid';
 
-
-export default function FullFeaturedCrudGrid() {
+export default function PrescriptionList() {
   const [rows, setRows] = useState([]);
-  const [rowModesModel, setRowModesModel] = React.useState({});
+  const [rowModesModel, setRowModesModel] = useState({});
 
   const fetchPatientData = async () => {
-    console.log("im hrere");
-    
+    console.log('im hrere');
+
     try {
-      const response = await axios.get("http://localhost:5051/api/getpatient");
+      const response = await axios.get(
+        'https://run.mocky.io/v3/9c136650-bd14-42bd-9e02-b198d40bee72'
+      );
+      
 
       console.log(response);
-      
-      const data = response?.data;
 
-      if(data?.data){
-        console.log(response?.data);
-        
-        setRows(data?.data);
+      let result = response?.data;
+
+      if (result?.data) {
+        console.log(result?.data);
+
+        result = result.data?.map((ele) => {
+          return (ele = {
+            ...ele,
+            name: ele?.medicines[0]?.name,
+            dosage: ele?.medicines[0]?.dosage,
+            id: ele?._id
+          });
+        });
+        setRows(result);
       }
       // const columnData = data?.map((col)=>{})
     } catch (error) {
-      console.log("error", error);
+      console.log('error', error);
     }
   };
 
   React.useEffect(() => {
-    console.log("user effoce");
-    
+    console.log('user effoce');
+
     fetchPatientData();
   }, []);
 
@@ -53,8 +63,8 @@ export default function FullFeaturedCrudGrid() {
   };
 
   const handleEditClick = (id) => () => {
-    console.log("id", id);
-    
+    console.log('id', id);
+
     setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.Edit } });
   };
 
@@ -79,78 +89,90 @@ export default function FullFeaturedCrudGrid() {
   };
 
   const processRowUpdate = async (newRow) => {
-    const updatedRow = { ...newRow, isNew: false };
+    const updatedRow = { ...newRow, medicines: [{name: newRow?.name, dosage: newRow?.dosage}], isNew: false };
+    console.log("updatedRow", updatedRow, newRow);
+    const payload = {
+      ...updatedRow,
+      medicines: [{name: updatedRow?.name, dosage: updatedRow?.dosage}],
+    }
+
+    console.log("update payload", payload)
+    
     try {
       // Assuming your JSON server is running on localhost:3000
-      const patientData = await axios.put(`http://localhost:8081/patientData/${newRow.id}`, updatedRow);
-      console.log(patientData);
-      
-      
+      // const patientData = await axios.put(
+      //   `http://localhost:8081/patientData/${newRow.id}`,
+      //   updatedRow
+      // );
+      // console.log(patientData);
+
       // Update state with the new row if the API call is successful
       setRows(rows.map((row) => (row.id === newRow.id ? updatedRow : row)));
       return updatedRow;
     } catch (error) {
-      console.error("Error updating row on JSON Server: ", error);
+      console.error('Error updating row on JSON Server: ', error);
       return newRow; // Optionally return the unchanged row on error
     }
   };
-  
 
   const handleRowModesModelChange = (newRowModesModel) => {
     setRowModesModel(newRowModesModel);
   };
 
   const columns = [
-    { field: 'name', 
-      headerName: 'Name', 
+    {
+      field: 'patientID',
+      headerName: 'patient ID',
       width: 100,
-      flex:1, 
-      editable: true 
+      flex: 1,
+      editable: false,
     },
     {
-      field: 'age',
-      headerName: 'Age',
+      field: 'name',
+      headerName: 'Medicines Name',
       type: 'text',
       width: 80,
       headerAlign: 'left',
+      flex: 1,
       editable: true,
     },
     {
-      field: 'gender',
-      headerName: 'Gender',
+      field: 'dosage',
+      headerName: 'Dosage',
       type: 'text',
       width: 80,
-      // flex:1,
+      flex:1,
       editable: true,
     },
     {
-      field: 'contact',
-      headerName: 'Contact Number',
+      field: 'note',
+      headerName: 'Instructions',
       width: 200,
-      flex:1,
+      flex: 1,
       editable: true,
       type: 'text',
     },
-    {
-      field: 'medicalHistory',
-      headerName: 'Medical History',
-      width: 150,
-      flex:1,
-      editable: true,
-      type: 'text',
-    },
-    {
-      field: 'address',
-      headerName: 'Address',
-      width: 350,
-      flex:1,
-      editable: true,
-      type: 'text',
-    },
+    // {
+    //   field: 'medicalHistory',
+    //   headerName: 'Medical History',
+    //   width: 150,
+    //   flex:1,
+    //   editable: true,
+    //   type: 'text',
+    // },
+    // {
+    //   field: 'address',
+    //   headerName: 'Address',
+    //   width: 350,
+    //   flex:1,
+    //   editable: true,
+    //   type: 'text',
+    // },
     {
       field: 'actions',
       type: 'actions',
-      headerName: 'Actions',flex:1,
+      headerName: 'Actions',
+      flex: 1,
       width: 150,
       cellClassName: 'actions',
       getActions: ({ id }) => {
@@ -209,7 +231,7 @@ export default function FullFeaturedCrudGrid() {
       }}
     >
       <DataGrid
-        getRowId ={(row) => row?.id}
+        getRowId={(row) => row?._id}
         rows={rows}
         columns={columns}
         editMode="row"
@@ -228,9 +250,13 @@ export default function FullFeaturedCrudGrid() {
           toolbar: GridToolbar,
         }}
         slotProps={{
-          toolbar: { setRows, setRowModesModel, showQuickFilter: true,
+          toolbar: {
+            setRows,
+            setRowModesModel,
+            showQuickFilter: true,
             csvOptions: { disableToolbarButton: false },
-            printOptions: { disableToolbarButton: false } },
+            printOptions: { disableToolbarButton: false },
+          },
         }}
       />
     </Box>
